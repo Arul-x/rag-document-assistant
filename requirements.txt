@@ -1,9 +1,10 @@
-
-streamlit
+streamlit==1.33.0
 pypdf
 python-docx
 sentence-transformers
-transformers
 faiss-cpu
 langchain
-torch
+
+transformers==4.38.2
+torch==2.1.2
+sentencepiece
