@@ -8,8 +8,10 @@ import numpy as np
 st.title("AI Document Assistant (RAG)")
 
 # Load models
-embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
-import streamlit as st
+@st.cache_resource
+def load_embedding_model():
+    return SentenceTransformer('all-MiniLM-L6-v2')
+embedding_model = load_embedding_model()
 
 @st.cache_resource
 def load_summarizer():
