@@ -1,6 +1,5 @@
 streamlit
-transformers==4.36.2
-torch==2.0.1
+transformers
 sentencepiece
 PyPDF2
 python-docx
