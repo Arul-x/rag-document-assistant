@@ -41,6 +41,7 @@ def summarize_text(text):
     )
     
     return tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+    summary = summarize_text(text)
 
 # File upload
 uploaded_file = st.file_uploader("Upload PDF or DOCX", type=["pdf","docx"])
