@@ -5,13 +5,19 @@ import docx
 from sentence_transformers import SentenceTransformer
 import faiss
 import numpy as np
-from transformers import pipeline
 
 st.title("AI Document Assistant (RAG)")
 
 # Load models
 embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
-summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+import streamlit as st
+
+@st.cache_resource
+def load_summarizer():
+    from transformers import pipeline
+    return pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+
+summarizer = load_summarizer()
 
 # File upload
 uploaded_file = st.file_uploader("Upload PDF or DOCX", type=["pdf","docx"])
