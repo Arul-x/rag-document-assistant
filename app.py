@@ -16,7 +16,10 @@ embedding_model = load_embedding_model()
 @st.cache_resource
 def load_summarizer():
     from transformers import pipeline
-    return pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+    return pipeline(
+        task="summarization",
+        model="sshleifer/distilbart-cnn-12-6"
+    )
 
 summarizer = load_summarizer()
 
