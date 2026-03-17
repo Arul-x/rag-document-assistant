@@ -1,10 +1,6 @@
-streamlit==1.33.0
-pypdf
-python-docx
-sentence-transformers
-faiss-cpu
-langchain
-
-transformers==4.38.2
-torch==2.1.2
+streamlit
+transformers
+torch
 sentencepiece
+PyPDF2
+python-docx
