@@ -73,12 +73,7 @@ if text:
     # -------- Summary --------
     summary_input = text[:2000]
 
-    summary = summarizer(
-        summary_input,
-        max_length=120,
-        min_length=40,
-        do_sample=False
-    )
+    summary = summarize_text(summary_input)
 
     st.subheader("Document Summary")
 
