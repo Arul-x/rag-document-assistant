@@ -73,11 +73,11 @@ if text:
     # -------- Summary --------
     summary_input = text[:2000]
 
-    summary = summarize_text(summary_input)
+    summary = summarize_text(text)
 
     st.subheader("Document Summary")
 
-    st.write(summary[0]['summary_text'])
+    st.write(summary)
 
     # -------- Chunk Text --------
     chunk_size = 500
