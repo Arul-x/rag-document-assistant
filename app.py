@@ -13,15 +13,34 @@ def load_embedding_model():
     return SentenceTransformer('all-MiniLM-L6-v2')
 embedding_model = load_embedding_model()
 
+import streamlit as st
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+
 @st.cache_resource
 def load_summarizer():
-    from transformers import pipeline
-    return pipeline(
-        task="summarization",
-        model="sshleifer/distilbart-cnn-12-6"
-    )
+    model_name = "sshleifer/distilbart-cnn-12-6"
+    
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+    
+    return tokenizer, model
 
-summarizer = load_summarizer()
+tokenizer, model = load_summarizer()
+
+
+def summarize_text(text):
+    inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=1024)
+    
+    summary_ids = model.generate(
+        inputs["input_ids"],
+        max_length=150,
+        min_length=40,
+        length_penalty=2.0,
+        num_beams=4,
+        early_stopping=True
+    )
+    
+    return tokenizer.decode(summary_ids[0], skip_special_tokens=True)
 
 # File upload
 uploaded_file = st.file_uploader("Upload PDF or DOCX", type=["pdf","docx"])
